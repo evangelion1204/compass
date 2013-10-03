@@ -6,6 +6,7 @@ module Compass
         DIAGONAL = 'diagonal'
         SMART = 'smart'
         VERTICAL = 'vertical'
+        BINTREE = 'bintree'
         
         def smart?
           layout == SMART
@@ -21,6 +22,10 @@ module Compass
 
         def vertical?
           layout == VERTICAL
+        end
+
+        def bintree?
+          layout == BINTREE
         end
         
         def layout
@@ -40,7 +45,10 @@ module Compass
           when HORIZONTAL
             require 'compass/sass_extensions/sprites/layout/horizontal'
             @images, @width, @height = Layout::Horizontal.new(@images, @kwargs).properties
-          else
+          when BINTREE
+            require 'compass/sass_extensions/sprites/layout/bintree'
+            @images, @width, @height = Layout::BinTree.new(@images, @kwargs).properties
+           else
             require 'compass/sass_extensions/sprites/layout/vertical'
             @images, @width, @height = Layout::Vertical.new(@images, @kwargs).properties
           end
